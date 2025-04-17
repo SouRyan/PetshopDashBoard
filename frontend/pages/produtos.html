@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PetShop System - Produtos</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../css/style.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="../index.html">
+                <i class="fas fa-paw me-2"></i>PetShop System
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="clientes.html">
+                            <i class="fas fa-users me-1"></i>Clientes
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="pets.html">
+                            <i class="fas fa-dog me-1"></i>Pets
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="servicos.html">
+                            <i class="fas fa-cut me-1"></i>Serviços
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="produtos.html">
+                            <i class="fas fa-box me-1"></i>Produtos
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="vendas.html">
+                            <i class="fas fa-shopping-cart me-1"></i>Vendas
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Conteúdo Principal -->
+    <div class="container mt-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>Gerenciamento de Produtos</h2>
+            <div>
+                <button class="btn btn-success" onclick="abrirModalProduto()">
+                    <i class="fas fa-plus me-1"></i>Novo Produto
+                </button>
+                <button class="btn btn-primary" onclick="abrirModalVenda()">
+                    <i class="fas fa-shopping-cart me-1"></i>Nova Venda
+                </button>
+            </div>
+        </div>
+
+        <!-- Filtros -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label class="form-label">Categoria</label>
+                        <select class="form-select" id="filtroCategoria" onchange="filtrarProdutos()">
+                            <option value="">Todas</option>
+                            <option value="racao">Ração</option>
+                            <option value="brinquedos">Brinquedos</option>
+                            <option value="medicamentos">Medicamentos</option>
+                            <option value="higiene">Higiene</option>
+                            <option value="acessorios">Acessórios</option>
+                            <option value="outros">Outros</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Buscar</label>
+                        <input type="text" class="form-control" id="buscarProduto" 
+                               placeholder="Digite para buscar..." onkeyup="filtrarProdutos()">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabela de Produtos -->
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Categoria</th>
+                                <th>Preço</th>
+                                <th>Estoque</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabelaProdutos">
+                            <!-- Será preenchido via JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Produto -->
+    <div class="modal fade" id="modalProduto" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalProdutoTitle">Novo Produto</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formProduto">
+                        <div class="mb-3">
+                            <label class="form-label">Nome</label>
+                            <input type="text" class="form-control" id="nomeProduto" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Descrição</label>
+                            <textarea class="form-control" id="descricaoProduto" rows="3" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Categoria</label>
+                            <select class="form-select" id="categoriaProduto" required>
+                                <option value="">Selecione...</option>
+                                <option value="racao">Ração</option>
+                                <option value="brinquedos">Brinquedos</option>
+                                <option value="medicamentos">Medicamentos</option>
+                                <option value="higiene">Higiene</option>
+                                <option value="acessorios">Acessórios</option>
+                                <option value="outros">Outros</option>
+                            </select>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Preço</label>
+                                <input type="number" class="form-control" id="precoProduto" 
+                                       min="0" step="0.01" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Unidade de Medida</label>
+                                <select class="form-select" id="unidadeMedida" required>
+                                    <option value="unidade">Unidade</option>
+                                    <option value="kg">Quilograma (kg)</option>
+                                    <option value="g">Grama (g)</option>
+                                    <option value="ml">Mililitro (ml)</option>
+                                    <option value="l">Litro (l)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Quantidade em Estoque</label>
+                            <input type="number" class="form-control" id="quantidadeAtual" 
+                                   min="0" value="0" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" onclick="salvarProduto()">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Venda -->
+    <div class="modal fade" id="modalVenda" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Nova Venda</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Produto</label>
+                            <select class="form-select" id="produtoVenda" onchange="atualizarPrecoVenda()">
+                                <option value="">Selecione...</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Quantidade</label>
+                            <input type="number" class="form-control" id="quantidadeVenda" 
+                                   min="1" value="1" onchange="atualizarTotalVenda()">
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Preço Unit.</label>
+                            <input type="number" class="form-control" id="precoVenda" 
+                                   readonly>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between mb-3">
+                        <button type="button" class="btn btn-primary" onclick="adicionarItemVenda()">
+                            <i class="fas fa-plus me-1"></i>Adicionar Item
+                        </button>
+                        <h4>Total: R$ <span id="totalVenda">0.00</span></h4>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Produto</th>
+                                    <th>Quantidade</th>
+                                    <th>Preço Unit.</th>
+                                    <th>Total</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="itensVenda">
+                                <!-- Será preenchido via JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" onclick="finalizarVenda()">Finalizar Venda</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/produtos.js"></script>
+</body>
+</html> 
