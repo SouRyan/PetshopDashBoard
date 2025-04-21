@@ -2,7 +2,7 @@
 
 Sistema de gerenciamento completo para pet shops, desenvolvido com Node.js, Express e MongoDB.
 
-![PetShop System](frontend/img/logo.png)
+![PetShop System]
 
 ## 📋 Índice
 
