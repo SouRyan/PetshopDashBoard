@@ -1,6 +1,12 @@
+
 # PetShop System
 
-Sistema de gerenciamento completo para pet shops, desenvolvido com Node.js, Express e MongoDB.
+O Petshop System é um sistema web completo, desenvolvido para atender às demandas de pet shops que buscam otimizar seus processos e oferecer uma gestão eficiente e intuitiva. A plataforma permite o controle total de cadastros de clientes, pets, serviços, agendamentos e vendas, tudo em um só lugar.
+
+Desenvolvido com Node.js, Express e MongoDB, o sistema garante alta performance, escalabilidade e segurança. Com uma interface amigável, o PetCare Manager oferece uma experiência simplificada tanto para os colaboradores quanto para os gestores, possibilitando uma administração mais ágil e organizada.
+
+Ideal para pet shops que desejam profissionalizar sua operação, melhorar o atendimento e impulsionar seus resultados no mercado.
+
 
 ## 📋 Índice
 
@@ -127,3 +133,4 @@ Este projeto está licenciado sob a licença MIT - veja o arquivo [LICENSE](LICE
 ---
 
 Desenvolvido com ❤️ para pet shops 
+© 2025 Ryan Brayan
